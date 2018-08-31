@@ -45,14 +45,19 @@ public class CardPainter{
         }
     }
 
+    //TODO: IMPLEMENT FOLDERPATH
     public static void exportPainted(String folderpath){
         for(int i = 0; i < images.size(); i ++){
-            String filename = "file" + String.valueOf(++exportCount).toString() + ".png";
+            String filename = folderpath + "file" + String.valueOf(++exportCount).toString() + ".png";
             try{
-                ImageIO.write(images.get(i), "png", new File(filename));
+                File file = new File(filename);
+                file.mkdirs();
+                ImageIO.write(images.get(i), "png", file);
             } catch(IOException e){
+                exportCount--;
                 e.printStackTrace();
             } catch(Exception e){
+                exportCount--;
                 e.printStackTrace();
             }
         } 
