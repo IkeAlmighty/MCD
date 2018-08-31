@@ -20,8 +20,8 @@ public class CardPainter{
         int imageIndex = 0;
         //create and add the first image to the image list:
         images.add(new BufferedImage(
-            Card.width * 3 + Card.borders,
-            Card.height * 3 + Card.borders,
+            Card.width * 3 + Card.borders + Card.borders*2,
+            Card.height * 3 + Card.borders + Card.borders*2,
             BufferedImage.TYPE_INT_RGB
         ));
         Graphics g = images.get(images.size() - 1).createGraphics();
@@ -31,8 +31,8 @@ public class CardPainter{
                 //we need to move to the next image:
                 imageIndex++;
                 images.add(new BufferedImage(
-                    Card.width * 3 + Card.borders,
-                    Card.height * 3 + Card.borders,
+                    Card.width * 3 + Card.borders*2,
+                    Card.height * 3 + Card.borders*2,
                     BufferedImage.TYPE_INT_RGB
                 ));
 

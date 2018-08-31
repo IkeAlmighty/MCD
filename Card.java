@@ -11,8 +11,8 @@ public class Card{
 
     public static final int width = 250;
     public static final int height = 350;
-    public static final int borders = 10;
-    private static final int marginWidth = 30;
+    public static final int borders = 2;
+    private static final int marginWidth = 30; //for text margins
 
     private String header;
     private String content;
