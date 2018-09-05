@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * This is a linked list, to make organizing the cards easier when painting them to a canvas and exporting them.
  * (the index can be set internally on an insert)
  */
-public class Card{
+public class Card {
 
     public static final int width = 250;
     public static final int height = 350;
@@ -102,6 +102,10 @@ public class Card{
         drawText(g, header, 10);
         g.setFont(new Font("TimesRoman", Font.PLAIN, 14));
         drawText(g, content, 75);
+    }
+
+    private Color getColor(){
+        return null;
     }
 
     private void drawText(Graphics g, String text, int yOffset){
