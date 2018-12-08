@@ -2,6 +2,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * This is a linked list, to make organizing the cards easier when painting them to a canvas and exporting them.
@@ -93,9 +94,8 @@ public class Card {
     public void draw(Graphics g){
         g.setColor(Color.LIGHT_GRAY);
         g.fillRect(x, y, width, height);
-        g.setColor(Color.WHITE);
+        g.setColor(this.getBackgroundColor());
         g.fillRect(x + 10, y + 10, width - 20, height - 20);
-
         g.setColor(Color.BLACK);
         g.setFont(new Font("TimesRoman", Font.BOLD, 18));
        // g.drawString(header, x + marginWidth, y + marginWidth + 10);//the 10 is a hardcode to compensate for the misaligning of the margins height wise compared to width wise.
@@ -104,8 +104,45 @@ public class Card {
         drawText(g, content, 75);
     }
 
-    private Color getColor(){
-        return null;
+    private Color getBackgroundColor(){
+        Color color = new Color(255, 255, 255);//default color
+        ArrayList<Color> colorList = new ArrayList<Color>();
+        Scanner scan = new Scanner(header);
+        scan.useDelimiter("[\\s:]");
+        while(scan.hasNext()){
+            String word = scan.next();
+            switch(word){
+                case "{D}": colorList.add(new Color(224, 123, 157)); break;
+                case "{L}": colorList.add(new Color(167, 234, 159)); break;
+                case "{B}": colorList.add(new Color(237, 221, 158)); break;
+                case "{M}": colorList.add(new Color(158, 158, 237)); break;
+                case "{S}": colorList.add(new Color(223, 159, 234)); break;
+                case "{T}": colorList.add(new Color(158, 237, 201)); break;
+            }
+        }
+        scan.close();
+
+        //average all the colors in the colorList, and set color equal to average.
+        int redSum = 0;
+        int greenSum = 0;
+        int blueSum = 0;
+
+        System.out.println("Color list size = " + colorList.size());
+        for(Color c: colorList){
+            redSum += c.getRed();
+            blueSum += c.getBlue();
+            greenSum += c.getGreen();
+        }
+
+        if (colorList.size() > 0){
+            color = new Color(
+                redSum/colorList.size(), 
+                blueSum/colorList.size(), 
+                greenSum/colorList.size()
+                );
+        }
+
+        return color;
     }
 
     private void drawText(Graphics g, String text, int yOffset){
